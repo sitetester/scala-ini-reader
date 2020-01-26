@@ -5,7 +5,7 @@ import scala.io.Source
 
 object IniReader {
 
-  def read(name: String): ListBuffer[(String, ListBuffer[(String, Any)])] = {
+  def read(name: String): List[(String, List[(String, Any)])] = {
     val str = Source.fromResource(name).mkString
 
     var section = ""
@@ -52,6 +52,7 @@ object IniReader {
         }
       })
 
-    sectionValuesMap
+    val toList = sectionValuesMap.toList
+    toList.map(x => (x._1, x._2.toList))
   }
 }
