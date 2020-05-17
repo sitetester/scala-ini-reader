@@ -27,7 +27,7 @@ object IniReader {
 
           section = line._1
             .replaceAll("\\[", "")
-            .replaceAll("\\]", "")
+            .replaceAll("]", "")
 
         } else {
           val kv = value
@@ -37,9 +37,9 @@ object IniReader {
           if (kv.length > 1) {
             keyValueTupleList = keyValueTupleList :+ (kv(0), kv(1))
 
-            val sectionExists = sectionValuesMap.count(m => m._1 == section)
+            val count = sectionValuesMap.count(m => m._1 == section)
 
-            if (sectionExists == 0) {
+            if (count == 0) {
               sectionValuesMap += (section -> keyValueTupleList)
             } else {
               for ((m, i) <- sectionValuesMap.zipWithIndex) {
